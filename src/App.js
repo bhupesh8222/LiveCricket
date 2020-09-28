@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Match from "./components/Match";
 import { getMatchData } from "./api/Api";
+import { Grid } from "@material-ui/core";
 function App() {
   const [matches, setMatch] = useState([]);
   useEffect(() => {
@@ -16,9 +16,19 @@ function App() {
     <div className="App">
       <h1>Welcome!</h1>
       <Navbar />
-      {matches.map((match) => {
-        return <Match match={match} />;
-      })}
+
+      <Grid container>
+        <Grid item sm="3"></Grid>
+        <Grid item sm="6">
+          {matches.map((match) => {
+            return match.type == "Twenty20" ? (
+              <Match key={match.unique_id} match={match} />
+            ) : (
+              ""
+            );
+          })}
+        </Grid>
+      </Grid>
     </div>
   );
 }
