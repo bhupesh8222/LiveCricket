@@ -3,32 +3,39 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Match from "./components/Match";
 import { getMatchData } from "./api/Api";
-import { Grid } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 function App() {
   const [matches, setMatch] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getMatchData().then((result) => {
       setMatch(result.matches);
-      //console.log(result);
+      setLoading(false);
     });
   }, []);
   return (
     <div className="App">
       <h1>Welcome!</h1>
       <Navbar />
-
-      <Grid container>
-        <Grid item sm="3"></Grid>
-        <Grid item sm="6">
-          {matches.map((match) => {
-            return match.type == "Twenty20" ? (
-              <Match key={match.unique_id} match={match} />
-            ) : (
-              ""
-            );
-          })}
-        </Grid>
-      </Grid>
+      {loading ? (
+        <>
+          <h1>Loading..</h1>
+          <CircularProgress />
+        </>
+      ) : (
+        <>
+          <h1>Recent T20 Matches</h1>
+          <div id="cards">
+            {matches.map((match) => {
+              return match.type == "Twenty20" ? (
+                <Match key={match.unique_id} match={match} />
+              ) : (
+                ""
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }

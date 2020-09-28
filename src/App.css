@@ -40,3 +40,13 @@ body {
         transform: rotate(360deg);
     }
 }
+
+#team {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#cards {
+    width: 70%;
+    margin-left: 15%;
+}

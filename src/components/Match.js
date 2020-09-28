@@ -38,32 +38,37 @@ function Match(props) {
       <Card style={{ marginTop: 20 }}>
         <CardContent>
           <Grid container justify="center" alignItems="center" spacing={3}>
-            <Grid item variant="h5">
-              <Typography variant="h5">{match["team-1"]}</Typography>
+            <Grid item xs={12} sm={4}>
+              <Typography id="team">{match["team-1"]}</Typography>
             </Grid>
-            <Grid item>
-              <img style={{ height: 120 }} src={require("../vs.jpg")}></img>
+            <Grid item xs={12} sm={4}>
+              <img
+                id="image"
+                style={{ height: 120 }}
+                src={require("../vs.jpg")}
+              ></img>
             </Grid>
-            <Grid item variant="h5">
-              <Typography variant="h5">{match["team-2"]}</Typography>
+            <Grid item xs={12} sm={4}>
+              <Typography id="team">{match["team-2"]}</Typography>
             </Grid>
           </Grid>
           <CardActions>
-            <Grid container justify="center">
-              <Button
-                onClick={() => handleClick(match["unique_id"])}
-                variant="contained"
-                color="primary"
-              >
-                Show details
-              </Button>
-              <Button
-                style={{ marginLeft: 10 }}
-                variant="contained"
-                color="primary"
-              >
-                Start date - {new Date(match.dateTimeGMT).toLocaleString()}
-              </Button>
+            <Grid container justify="center" spacing={1}>
+              <Grid item>
+                <Button
+                  onClick={() => handleClick(match["unique_id"])}
+                  variant="contained"
+                  color="primary"
+                >
+                  Show details
+                </Button>
+              </Grid>
+
+              <Grid item>
+                <Button variant="contained" color="primary">
+                  From {new Date(match.dateTimeGMT).toLocaleString()}
+                </Button>
+              </Grid>
             </Grid>
           </CardActions>
         </CardContent>
